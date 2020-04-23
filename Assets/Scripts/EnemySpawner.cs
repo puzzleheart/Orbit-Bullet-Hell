@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private float minTimeBetweenSpawns = 1f, maxTimeBetweenSpawns = 3f;
+    [SerializeField] private float minTimeBetweenSpawns = 1, maxTimeBetweenSpawns = 2f;
     [SerializeField] private Transform[] spawnPoints = default;
     [SerializeField] private GameObject[] enemiesToSpawn = default;
 
@@ -30,5 +30,11 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(timeUntilNextSpawn);
 
         canSpawn = true;
+    }
+
+    public void ChangeTiming(float newMinTime, float newMaxTime)
+    {
+        minTimeBetweenSpawns = newMinTime;
+        maxTimeBetweenSpawns = newMaxTime;
     }
 }
