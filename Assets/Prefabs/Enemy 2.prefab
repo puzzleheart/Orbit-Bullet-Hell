@@ -145,3 +145,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   moveSpeed: 3.5
+  destroyVFX: {fileID: 6340774972060944788, guid: c13054a042db90e47a130e15acf1a080,
+    type: 3}

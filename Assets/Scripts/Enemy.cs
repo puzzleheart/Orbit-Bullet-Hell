@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int health = 1;
     [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private GameObject destroyVFX = default;
 
     private Transform playerTransform;
     private Rigidbody2D rb;
@@ -44,6 +45,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         //TODO animations, particles, sound
+        Instantiate(destroyVFX, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 
@@ -52,6 +54,7 @@ public class Enemy : MonoBehaviour
         if (collision.tag == "Player")
         {
             collision.GetComponent<Player>().TakeDamage();
+            Die();
         }
     }
 }

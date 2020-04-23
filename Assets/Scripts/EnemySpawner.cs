@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (canSpawn)
+        if (canSpawn && LevelManager.Instance.player != null)
         {
             canSpawn = false;
             StartCoroutine(SpawnRoutine());

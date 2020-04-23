@@ -6,6 +6,13 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private int health = 1;
 
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     void Update()
     {
         transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -17,13 +24,16 @@ public class Player : MonoBehaviour
 
         if (health <= 0)
         {
-            Die();
+            anim.SetTrigger("deathTrigger");
+        }
+        else
+        {
+            anim.SetTrigger("hitTrigger");
         }
     }
 
     private void Die()
     {
-        Debug.Log("Player was killed");
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
