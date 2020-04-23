@@ -6,7 +6,9 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int health = 1;
     [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private int scorePoints = 5;
     [SerializeField] private GameObject destroyVFX = default;
+    [SerializeField] private AudioClip destroySFX = default;
 
     private Transform playerTransform;
     private Rigidbody2D rb;
@@ -46,6 +48,9 @@ public class Enemy : MonoBehaviour
     {
         //TODO animations, particles, sound
         Instantiate(destroyVFX, transform.position, transform.rotation);
+        AudioManager.Instance.PlayClip(destroySFX);
+        CameraShake.Instance.CamShake();
+        LevelManager.Instance.IncreaseScore(scorePoints);
         Destroy(gameObject);
     }
 

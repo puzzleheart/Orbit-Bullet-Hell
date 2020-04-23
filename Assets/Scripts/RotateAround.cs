@@ -9,8 +9,16 @@ public class RotateAround : MonoBehaviour
 
     private Vector3 zAxis = new Vector3(0, 0, 1);
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            speed = -speed;
+        }
+    }
+
     void FixedUpdate()
     {
-        transform.RotateAround(target.position, zAxis, speed);
+        transform.RotateAround(target.position, zAxis, -speed);
     }
 }

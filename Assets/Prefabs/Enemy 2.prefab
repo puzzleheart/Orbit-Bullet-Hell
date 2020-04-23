@@ -147,3 +147,4 @@ MonoBehaviour:
   moveSpeed: 3.5
   destroyVFX: {fileID: 6340774972060944788, guid: c13054a042db90e47a130e15acf1a080,
     type: 3}
+  destroySFX: {fileID: 8300000, guid: de0994455065bec4787476c98b9c87d0, type: 3}

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private int health = 1;
+    [SerializeField] private AudioClip hurtSFX = default;
+    [SerializeField] private AudioClip deathSFX = default;
 
     private Animator anim;
 
@@ -25,10 +27,13 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             anim.SetTrigger("deathTrigger");
+            CameraShake.Instance.StrongCamShake();
+            AudioManager.Instance.PlayClip(deathSFX);
         }
         else
         {
             anim.SetTrigger("hitTrigger");
+            AudioManager.Instance.PlayClip(hurtSFX);
         }
     }
 
