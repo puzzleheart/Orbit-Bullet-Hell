@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int scorePoints = 5;
     [SerializeField] private GameObject destroyVFX = default;
     [SerializeField] private AudioClip destroySFX = default;
+    [SerializeField] private Color lostHealthColor = default;
 
     private Transform playerTransform;
     private Rigidbody2D rb;
@@ -38,15 +39,22 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int amount)
     {
         health -= amount;
+
         if (health <= 0)
         {
             Die();
+        }
+        else
+        {
+            Instantiate(destroyVFX, transform.position, transform.rotation);
+            AudioManager.Instance.PlayClip(destroySFX);
+            CameraShake.Instance.CamShake();
+            GetComponent<SpriteRenderer>().color = lostHealthColor;
         }
     }
 
     public void Die()
     {
-        //TODO animations, particles, sound
         Instantiate(destroyVFX, transform.position, transform.rotation);
         AudioManager.Instance.PlayClip(destroySFX);
         CameraShake.Instance.CamShake();

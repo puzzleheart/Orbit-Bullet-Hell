@@ -56,6 +56,9 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        UIManager.Instance.gameOverText.gameObject.SetActive(true);
+        UIManager.Instance.tryAgainText.gameObject.SetActive(true);
+        LevelManager.Instance.SetGameOver();
         Destroy(gameObject);
     }
 

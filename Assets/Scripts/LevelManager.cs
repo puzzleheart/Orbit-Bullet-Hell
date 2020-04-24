@@ -1,18 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : Singleton<LevelManager>
 {
     public Player player;
     public EnemySpawner enemySpawner;
     public int score = 0;
+    public GameObject enemyToAdd;
 
     private int levelSpeed = 1;
+    private bool gameOver = false;
 
     private void Start()
     {
         UIManager.Instance.scoreText.text = score.ToString();
+        Cursor.visible = false;
+
+    }
+
+    private void Update()
+    {
+        if (gameOver)
+        {
+            if (Input.anyKeyDown)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
     }
 
     public void IncreaseScore(int amount)
@@ -29,7 +45,7 @@ public class LevelManager : Singleton<LevelManager>
         }
         else if (levelSpeed == 2 && score >= 200)
         {
-            //TODO: add new enemy
+            enemySpawner.AddEnemyToSpawnList(enemyToAdd);
             levelSpeed = 3;
             UIManager.Instance.speedText.text = levelSpeed.ToString();
             enemySpawner.ChangeTiming(.8f, 1.4f);
@@ -64,6 +80,11 @@ public class LevelManager : Singleton<LevelManager>
             UIManager.Instance.speedText.text = levelSpeed.ToString();
             enemySpawner.ChangeTiming(.35f, .45f);
         }
+    }
+
+    public void SetGameOver()
+    {
+        gameOver = true;
     }
 
 

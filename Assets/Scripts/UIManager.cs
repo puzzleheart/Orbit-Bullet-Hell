@@ -7,9 +7,11 @@ public class UIManager : Singleton<UIManager>
 {
     public Text scoreText;
     public Text speedText;
+    public Text gameOverText;
+    public Text tryAgainText;   
     public Image healthBar;
     public Sprite[] healthBarImages;
-
+    
     private int healthBarCounter = 0;
 
     public void LoseHealthUI()

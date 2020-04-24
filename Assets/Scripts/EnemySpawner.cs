@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private float minTimeBetweenSpawns = 1, maxTimeBetweenSpawns = 2f;
     [SerializeField] private Transform[] spawnPoints = default;
-    [SerializeField] private GameObject[] enemiesToSpawn = default;
+    [SerializeField] private List<GameObject> enemiesToSpawn = new List<GameObject>();
 
     private bool canSpawn = true;
 
@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnRoutine()
     {
         float timeUntilNextSpawn = Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
-        GameObject randomEnemy = enemiesToSpawn[Random.Range(0, enemiesToSpawn.Length)];
+        GameObject randomEnemy = enemiesToSpawn[Random.Range(0, enemiesToSpawn.Count)];
         Transform randomTransform = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
         Instantiate(randomEnemy, randomTransform.position, Quaternion.identity);
@@ -36,5 +36,10 @@ public class EnemySpawner : MonoBehaviour
     {
         minTimeBetweenSpawns = newMinTime;
         maxTimeBetweenSpawns = newMaxTime;
+    }
+
+    public void AddEnemyToSpawnList(GameObject enemy)
+    {
+        enemiesToSpawn.Add(enemy);
     }
 }
